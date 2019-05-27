@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'form-reactive';
+  constructor(private fb: FormBuilder) {
+  }
+
+
+  public user = this.fb.group({
+    name: ['', [Validators.required, ]],
+    surname: ['', [Validators.required, ]],
+    email: ['', [Validators.required, ]],
+    phone: [''],
+    password: ['', [Validators.required, ]],
+    pet: ['', [Validators.required, ]],
+    address: this.fb.group({
+      city: ['', [Validators.required, ]],
+      street: ['', [Validators.required, ]],
+      building: ['', [Validators.required, ]],
+      flatNo: [''],
+    }),
+    consents: this.fb.group({
+      newsletter: ['', [Validators.required, ]],
+      sms: [''],
+    }),
+  });
+
+  onSubmit() {
+    console.log(this.user.getRawValue());
+  }
+
 }

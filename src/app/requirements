@@ -1,0 +1,35 @@
+0) Formularz musi zostać przygotowany za pomocą narzędzi dostępnych w ReactiveFormsModule;
+dozwolone (ale nie wymagane) jest korzystanie z wszystkich dostępnych bibliotek, zestawów
+gotowych komponentów itd.
+
+2) kolorem czerwonym oznaczono pola wymagane
+
+3) pole phone może zawierać wyłącznie cyfry, spacje oraz znaki + ( ) -
+
+4) polu password w formularzu powinien towarzyszyć drugi input, do którego
+użytkownik musi wprowadzić hasło ponownie (wartości w obu polach muszą być
+identyczne – w przeciwnym wypadku formularz jest wypełniony niepoprawnie)
+
+5) pole password musi składać się z co najmniej 8 znaków i zawierać przynajmniej
+jedną wielką literę oraz jeden ze znaków: @ # $ % ^ &
+
+6) pole pet może przyjąć wyłącznie jedną z podanych trzech wartości (w formularzu
+należy użyć radiobuttonów)
+
+7) pola newsletter oraz sms powinny być obsłużone w formularzu za pomocą checkboxów
+
+8) checkbox obsługujący pole sms powinien pojawić się w formularzu wyłącznie wtedy,
+gdy użytkownik poda poprawny numer telefonu w polu phone
+
+9) wszystkie ciągi znaków w danych wyjściowych powinny być strimmowane (brak spacji
+na początku i na końcu ciągu)
+
+10) walidacja formularza powinna nastąpić po naciśnięciu przycisku lub „na
+bieżąco”, po przejściu do kolejnego inputu – w każdym przypadku obok błędnie
+wypełnionego pola powinna pojawić się odpowiednia informacja
+
+11) dane wyjściowe powinny zostać wyświetlone w konsoli (wyłącznie wtedy, gdy
+formularz został wypełniony właściwie!)
+
+12) każde pole formularza powinno być opatrzone właściwą etykietą (Imię, Nazwisko
+itd.)
