@@ -1,61 +1,79 @@
-<div class="">
+<div class="container" style="margin-outside: 15px">
   <form class="form-group" [formGroup]="user" (ngSubmit)="onSubmit()">
 
     <label for="name">Imię</label>
     <input type="text" class="form-control" id="name"
-           formControlName="name" placeholder="Imię">
+           formControlName="name" placeholder="Imię" >
+    <div
+      *ngIf="user.controls['name'].invalid && (user.controls['name'].dirty || user.controls['name'].touched)"
+      class="alert alert-danger"> pole wymagane
+    </div>
 
     <label for="surname">Nazwisko</label>
     <input type="text" class="form-control" id="surname"
            formControlName="surname" placeholder="Nazwisko">
+    <div *ngIf="isValid('surname')" class="alert alert-danger"> pole wymagane </div>
     <label for="email">adres e-mail</label>
     <input type="email" class="form-control" id="email"
-           formControlName="email" placeholder="email">
+           formControlName="email" placeholder="adres e-mail">
+    <div *ngIf="isValid('email')" class="alert alert-danger"> pole wymagane, podaj poprawny adress email </div>
 
     <label for="phone">Numer telefonu</label>
     <input type="text" class="form-control" id="phone"
-           formControlName="phone" placeholder="phone">
-    <label for="password">Numer telefonu</label>
-    <input type="password" class="form-control" id="password"
-           formControlName="password" placeholder="password">
-    <label for="pet">Zwierzę</label>
-    <div class="" id="pet">
-      <!-- Material checked -->
+           formControlName="phone" placeholder="numer telefonu">
+    <div *ngIf="isValid('phone')" class="alert alert-danger"> pole phone może zawierać wyłącznie cyfry, spacje oraz znaki + ( ) -</div>
 
-      <div class="form-check">
+    <label for="password">Hasło</label>
+    <input type="password" class="form-control" id="password"
+           formControlName="password" >
+    <div *ngIf="isValid('password')" class="alert alert-danger"> za slabe hasło, wymagane: 8 znaków w tym duża litera i znak specjalny [@,#,$,%,^,&] </div>
+
+
+
+    <label for="pet">Zwierzę</label>
+    <div id="pet">
+      <div class="custom-control custom-radio">
         <input type="radio" class="form-check-input" id="dog" value="dog" formControlName="pet">
         <label class="form-check-label" for="dog">Pies</label>
       </div>
-      <div class="form-check">
+      <div class="custom-control custom-radio">
         <input type="radio" class="form-check-input" id="cat" value="cat" formControlName="pet">
         <label class="form-check-label" for="cat">Kot</label>
       </div>
-      <div class="form-check">
+      <div class="custom-control custom-radio">
         <input type="radio" class="form-check-input" id="other" value="other" formControlName="pet">
-        <label class="form-check-label"for="other">Inne</label>
+        <label class="form-check-label" for="other">Inne</label>
       </div>
     </div>
     <div formGroupName="address">
       <label for="city">Miasto</label>
       <input type="text" class="form-control" id="city"
              formControlName="city" placeholder="city">
-      <label for="street">Numer telefonu</label>
+      <div *ngIf="isValid('address.city')" class="alert alert-danger"> pole wymagane </div>
+
+      <label for="street">Nazwa ulicy</label>
       <input type="text" class="form-control" id="street"
-             formControlName="street" placeholder="password">
+             formControlName="street" placeholder="ulica">
+      <div *ngIf="isValid('address.street')" class="alert alert-danger"> pole wymagane </div>
       <label for="building">Numer budynku</label>
       <input type="text" class="form-control" id="building"
-             formControlName="building" placeholder="building">
-      <label for="flatNo">Numer telefonu</label>
+             formControlName="building">
+      <div *ngIf="isValid('address.building')" class="alert alert-danger"> pole wymagane </div>
+      <label for="flatNo">Numer mieszkania</label>
       <input type="flatNo" class="form-control" id="flatNo"
-             formControlName="flatNo" placeholder="flatNo">
+             formControlName="flatNo">
     </div>
     <div formGroupName="consents">
-      <label for="newsletter">Zgoda na newsletter</label>
-      <input type="checkbox" class="form-control" id="newsletter"
-             formControlName="newsletter">
-      <label for="sms">Zgoda na otrzymywanie sms'ow</label>
-      <input type="checkbox" class="form-control" id="sms"
-             formControlName="sms" [disabled]="!user.valid">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="newsletter" formGroupName="newsletter">
+        <label for="newsletter" class="form-check-label">Zgoda na newsletter</label>
+      </div>
+      <div *ngIf="isValid('consents.newsletter')" class="alert alert-danger"> pole wymagane </div>
+
+      <div class="form-check" *ngIf="user.controls['phone'].valid && user.controls['phone'].touched">
+        <input type="checkbox" class="form-check-input" id="sms" formControlName="sms">
+        <label class="form-check-label" for="sms">Zgoda na otrzymywanie sms'ow</label>
+      </div>
     </div>
     <!--  aktywne tylko przy podaniu numeru telefonu  -->
     <button type="submit" [disabled]="!user.valid">Submit</button>
