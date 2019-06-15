@@ -1,4 +1,4 @@
-import {Component, Directive, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ConfirmPasswordValidator} from './confirmPasswordValidator';
 
@@ -14,18 +14,18 @@ export class AppComponent implements OnInit {
   }
 
   public user = this.fb.group({
-    name: ['', [Validators.required,]],
-    surname: ['', [Validators.required,]],
+    name: ['', [Validators.required, ]],
+    surname: ['', [Validators.required, ]],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.minLength(1), Validators.pattern('^[0-9 ()+-]*$')]],
     password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[@#$%^&]).{8,}$')]],
     cpassword: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[@#$%^&]).{8,}$')]],
-    pet: ['', [Validators.required,]],
+    pet: ['', [Validators.required, ]],
     address: this.fb.group({
-      city: ['', [Validators.required,]],
-      street: ['', [Validators.required,]],
-      building: ['', [Validators.required,]],
-      flatNo: [''],
+      city: ['', [Validators.required, ]],
+      street: ['', [Validators.required, ]],
+      building: ['', [Validators.required, ]],
+      flatNo: [null],
     }),
     consents: this.fb.group({
       newsletter: [false, Validators.requiredTrue],
@@ -42,13 +42,24 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     this.registeredUser = JSON.parse(JSON.stringify(this.user.value).replace(/"\s+|\s+"/g, '"'));
-    console.log(this.registeredUser);
+    // console.log(this.registeredUser);
     // console.log('---------------------------');
-    // console.log(this.user.getRawValue());
-    // console.log('---------------------------');
-    // console.log(this.user.value);
-    // console.log('---------------------------');
-
+    console.log(
+      'Imię: ' + this.registeredUser.name +
+      '\nNazwisko: ' + this.registeredUser.surname +
+      '\nAdres e-mail: ' + this.registeredUser.email +
+      '\nNumer telefonu: ' + this.registeredUser.phone +
+      '\nHasło: ' + this.registeredUser.password +
+      '\nZwierzę: ' + this.registeredUser.pet +
+      '\nAdres:' +
+      '\n\tMiasto: ' + this.registeredUser.address.city +
+      '\n\tNazwa ulicy: ' + this.registeredUser.address.street +
+      '\n\tNumer Budynku: ' + this.registeredUser.address.building +
+      (this.registeredUser.address.flatNo !== null ? ('\n\tNumer Mieszkania: ' + this.registeredUser.address.flatNo) : '') +
+      '\n Zgoda na newsletter: Tak' +
+      '\n Zgoda na smsy: ' + (this.registeredUser.consents.sms ? 'Tak' : 'Nie')
+);
+    //
   }
 
   isValid(field: string) {
